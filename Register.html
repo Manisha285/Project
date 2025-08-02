@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QuickDesk - Register</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom underline style for headings */
+    .underline-accent {
+      position: relative;
+      display: inline-block;
+    }
+    .underline-accent::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      left: 0;
+      bottom: 0;
+      border-radius: 2px;
+      background-color: #06b6d4; /* Tailwind cyan-500 */
+      transform: translateY(4px);
+      z-index: -1;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-cyan-50 to-white flex items-center justify-center px-4 py-12">
+  <main class="max-w-md w-full bg-white shadow-lg rounded-lg p-8 sm:p-12">
+    <h1 class="text-3xl font-[cursive] mb-6 text-cyan-700 text-center">QuickDesk Registration</h1>
+    <form id="registerForm" class="space-y-6" novalidate>
+      <div>
+        <label for="fullName" class="block mb-2 font-semibold text-gray-700">Full Name</label>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          placeholder="Your full name"
+          required
+          autocomplete="name"
+        />
+        <p class="text-red-600 text-sm mt-1 hidden" id="fullNameError">Please enter your full name.</p>
+      </div>
+
+      <div>
+        <label for="email" class="block mb-2 font-semibold text-gray-700">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          placeholder="name@example.com"
+          required
+          autocomplete="email"
+        />
+        <p class="text-red-600 text-sm mt-1 hidden" id="emailError">Please enter a valid email address.</p>
+      </div>
+
+      <div>
+        <label for="role" class="block mb-2 font-semibold text-gray-700">Role</label>
+        <select
+          id="role"
+          name="role"
+          class="w-full border border-gray-300 rounded-md px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          required
+        >
+          <option value="" disabled selected>Select your role</option>
+          <option value="end_user">End User (Employee/Customer)</option>
+          <option value="support_agent">Support Agent</option>
+          <option value="admin">Admin</option>
+        </select>
+        <p class="text-red-600 text-sm mt-1 hidden" id="roleError">Please select a role.</p>
+      </div>
+
+      <div>
+        <label for="password" class="block mb-2 font-semibold text-gray-700">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          placeholder="Min. 8 characters"
+          minlength="8"
+          required
+          autocomplete="new-password"
+        />
+        <p class="text-red-600 text-sm mt-1 hidden" id="passwordError">Password must be at least 8 characters.</p>
+      </div>
+
+      <div>
+        <label for="confirmPassword" class="block mb-2 font-semibold text-gray-700">Confirm Password</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          placeholder="Re-enter password"
+          required
+          autocomplete="new-password"
+        />
+        <p class="text-red-600 text-sm mt-1 hidden" id="confirmPasswordError">Passwords do not match.</p>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-3 rounded-md transition-colors duration-300"
+      >
+        Register
+      </button>
+    </form>
+
+    <p class="mt-6 text-center text-gray-600">
+      Already have an account?
+      <a href="Login.html" class="text-cyan-600 hover:underline font-semibold">Log In</a>
+    </p>
+  </main>
+
+  <script>
+    const registerForm = document.getElementById("registerForm");
+
+    registerForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Clear previous errors
+      hideAllErrors();
+
+      const fullName = this.fullName.value.trim();
+      const email = this.email.value.trim();
+      const role = this.role.value;
+      const password = this.password.value;
+      const confirmPassword = this.confirmPassword.value;
+
+      let isValid = true;
+
+      if (!fullName) {
+        showError("fullNameError");
+        isValid = false;
+      }
+      if (!validateEmail(email)) {
+        showError("emailError");
+        isValid = false;
+      }
+      if (!role) {
+        showError("roleError");
+        isValid = false;
+      }
+      if (password.length < 8) {
+        showError("passwordError");
+        isValid = false;
+      }
+      if (password !== confirmPassword) {
+        showError("confirmPasswordError");
+        isValid = false;
+      }
+
+      if (isValid) {
+        // Here you can add your logic to submit form to server via fetch/ajax or similar
+
+        alert("Registration successful for: " + fullName + " (" + role.replace('_',' ') + ")");
+        this.reset();
+      }
+    });
+
+    function showError(id) {
+      document.getElementById(id).classList.remove("hidden");
+    }
+
+    function hideAllErrors() {
+      [
+        "fullNameError",
+        "emailError",
+        "roleError",
+        "passwordError",
+        "confirmPasswordError",
+      ].forEach((id) => document.getElementById(id).classList.add("hidden"));
+    }
+
+    function validateEmail(email) {
+      const re =
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return re.test(email.toLowerCase());
+    }
+  </script>
+</body>
+</html>
+
