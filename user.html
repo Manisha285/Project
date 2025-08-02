@@ -1,106 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>QuickDesk - User Panel</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f1f5f9;
-      margin: 0;
-      padding: 0;
-    }
-    .navbar {
-      background-color: #0f172a;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 20px;
-    }
-    .container {
-      max-width: 800px;
-      margin: 40px auto;
-      background-color: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px #cbd5e1;
-    }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    label {
-      display: block;
-      font-weight: bold;
-    }
-    input, textarea, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: 1px solid #94a3b8;
-    }
-    button {
-      background-color: #2563eb;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    h2 {
-      margin-bottom: 20px;
-      color: #1e293b;
-    }
-    .ticket-status {
-      margin-top: 40px;
-    }
-    .ticket {
-      background-color: #e2e8f0;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 5px;
-    }
-  </style>
+  <link rel="stylesheet" href="user.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="navbar">QuickDesk - User Panel</div>
 
-  <div class="container">
-    <h2>Raise a Ticket</h2>
-    <form>
-      <div class="form-group">
-        <label for="subject">Subject</label>
-        <input type="text" id="subject" placeholder="Issue subject">
-      </div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea id="description" rows="4" placeholder="Describe your issue..."></textarea>
-      </div>
-      <div class="form-group">
-        <label for="priority">Priority</label>
-        <select id="priority">
-          <option>Low</option>
-          <option>Medium</option>
-          <option>High</option>
-        </select>
-      </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">QuickDesk</div>
+    <ul class="nav-links">
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#create-ticket">Create Ticket</a></li>
+      <li><a href="#my-tickets">My Tickets</a></li>
+      <li><a href="#profile">Profile</a></li>
+    </ul>
+    <div class="nav-user">
+      <img src="assets/user-icon.png" alt="User" />
+      <span>Hello, User</span>
+    </div>
+  </nav>
+
+  <!-- Hero Banner -->
+  <header class="hero">
+    <h1>Welcome to QuickDesk</h1>
+    <p>Create and track support tickets with ease.</p>
+    <img src="assets/support-banner.png" alt="Support Banner" />
+  </header>
+
+  <!-- Ticket Creation -->
+  <section id="create-ticket" class="section">
+    <h2>Create a Support Ticket</h2>
+    <form id="ticketForm">
+      <input type="text" placeholder="Subject" required />
+      <select required>
+        <option value="">Select Category</option>
+        <option>Technical</option>
+        <option>Billing</option>
+        <option>General</option>
+      </select>
+      <textarea placeholder="Describe your issue..." required></textarea>
+      <input type="file" />
       <button type="submit">Submit Ticket</button>
     </form>
+  </section>
 
-    <div class="ticket-status">
-      <h2>Your Tickets</h2>
+  <!-- Ticket List -->
+  <section id="my-tickets" class="section">
+    <h2>My Tickets</h2>
+    <div class="ticket-list">
+      <!-- Tickets will load here from JS -->
+    </div>
+  </section>
 
-      <div class="ticket">
-        <strong>Subject:</strong> Internet not working<br>
-        <strong>Status:</strong> In Progress
-      </div>
-
-      <div class="ticket">
-        <strong>Subject:</strong> Software installation<br>
-        <strong>Status:</strong> Resolved
+  <!-- Profile Section -->
+  <section id="profile" class="section">
+    <h2>My Profile</h2>
+    <div class="profile-card">
+      <img src="assets/profile.png" alt="Profile" />
+      <div>
+        <p><strong>Name:</strong> John Doe</p>
+        <p><strong>Email:</strong> john@example.com</p>
+        <p><strong>Notifications:</strong> Enabled</p>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 QuickDesk. All rights reserved.</p>
+  </footer>
+
+  <script src="user.js"></script>
 </body>
 </html>

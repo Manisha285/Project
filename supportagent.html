@@ -2,25 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Support Agent Panel - QuickDesk</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickDesk – Support Agent Panel</title>
+  <link rel="stylesheet" href="agent.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <header>
-    <h1>QuickDesk - Support Agent Panel</h1>
-    <nav>
-      <button onclick="filterTickets('my')">My Tickets</button>
-      <button onclick="filterTickets('all')">All Tickets</button>
-    </nav>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="images/logo.png" alt="QuickDesk Logo" />
+      <h1>QuickDesk</h1>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="#">My Tickets</a></li>
+      <li><a href="#">All Tickets</a></li>
+      <li><a href="#">Create Ticket</a></li>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </nav>
+
+  <header class="header-section">
+    <h2>Support Agent Dashboard</h2>
+    <p>Manage tickets, respond to users, and ensure resolution.</p>
   </header>
 
-  <main>
-    <section id="ticket-list">
-      <!-- Tickets will be loaded here -->
-    </section>
-  </main>
+  <section class="ticket-section">
+    <div class="ticket-controls">
+      <button onclick="filterTickets('my')">My Tickets</button>
+      <button onclick="filterTickets('all')">All Tickets</button>
+      <button onclick="createNewTicket()">Create Ticket</button>
+    </div>
 
-  <script src="script.js"></script>
+    <div class="ticket-list" id="ticketList">
+      <!-- Tickets will be loaded dynamically here -->
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 QuickDesk. Built for the Hackathon.</p>
+  </footer>
+
+  <script src="agent.js"></script>
 </body>
 </html>

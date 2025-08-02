@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickDesk – Admin Panel</title>
+  <link rel="stylesheet" href="admin.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="images/logo.png" alt="QuickDesk Logo" />
+      <h1>QuickDesk Admin</h1>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#users">Users</a></li>
+      <li><a href="#tickets">Tickets</a></li>
+      <li><a href="#settings">Settings</a></li>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Dashboard Header -->
+  <header class="header-section">
+    <h2>Admin Dashboard</h2>
+    <p>Monitor platform activity and manage users & tickets.</p>
+  </header>
+
+  <!-- Main Dashboard Content -->
+  <section id="dashboard" class="dashboard">
+    <div class="card">
+      <h3>Total Users</h3>
+      <p id="totalUsers">--</p>
+    </div>
+    <div class="card">
+      <h3>Total Tickets</h3>
+      <p id="totalTickets">--</p>
+    </div>
+    <div class="card">
+      <h3>Pending Tickets</h3>
+      <p id="pendingTickets">--</p>
+    </div>
+  </section>
+
+  <!-- User Management Section -->
+  <section id="users" class="section">
+    <h2>User Management</h2>
+    <div id="userList" class="list-section">
+      <!-- Users will load here via JS -->
+    </div>
+  </section>
+
+  <!-- Ticket Management Section -->
+  <section id="tickets" class="section">
+    <h2>All Tickets</h2>
+    <div id="ticketList" class="list-section">
+      <!-- Tickets will load here via JS -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 QuickDesk Admin. All rights reserved.</p>
+  </footer>
+
+  <script src="admin.js"></script>
+</body>
+</html>
