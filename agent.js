@@ -1,6 +1,5 @@
 // agent.js
 
-// Sample ticket data (can be replaced with actual API/data later)
 const tickets = [
   {
     id: 1,

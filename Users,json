@@ -4,5 +4,11 @@
     "email": "admin@quickdesk.com",
     "role": "admin",
     "password": "admin123"
+  },
+   {
+    "name": "customer",
+    "email": "customer@gmail.com",
+    "role": "end user/customer",
+    "password": "12345678"
   }
 ]
