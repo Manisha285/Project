@@ -6,7 +6,6 @@
   <title>QuickDesk - Register</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Custom underline style for headings */
     .underline-accent {
       position: relative;
       display: inline-block;
@@ -19,7 +18,7 @@
       left: 0;
       bottom: 0;
       border-radius: 2px;
-      background-color: #06b6d4; /* Tailwind cyan-500 */
+      background-color: #06b6d4;
       transform: translateY(4px);
       z-index: -1;
     }
@@ -31,40 +30,19 @@
     <form id="registerForm" class="space-y-6" novalidate>
       <div>
         <label for="fullName" class="block mb-2 font-semibold text-gray-700">Full Name</label>
-        <input
-          type="text"
-          id="fullName"
-          name="fullName"
-          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-          placeholder="Your full name"
-          required
-          autocomplete="name"
-        />
+        <input type="text" id="fullName" name="fullName" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="Your full name" required />
         <p class="text-red-600 text-sm mt-1 hidden" id="fullNameError">Please enter your full name.</p>
       </div>
 
       <div>
         <label for="email" class="block mb-2 font-semibold text-gray-700">Email Address</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-          placeholder="name@example.com"
-          required
-          autocomplete="email"
-        />
+        <input type="email" id="email" name="email" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="name@example.com" required />
         <p class="text-red-600 text-sm mt-1 hidden" id="emailError">Please enter a valid email address.</p>
       </div>
 
       <div>
         <label for="role" class="block mb-2 font-semibold text-gray-700">Role</label>
-        <select
-          id="role"
-          name="role"
-          class="w-full border border-gray-300 rounded-md px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
-          required
-        >
+        <select id="role" name="role" class="w-full border border-gray-300 rounded-md px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-cyan-400" required>
           <option value="" disabled selected>Select your role</option>
           <option value="end_user">End User (Employee/Customer)</option>
           <option value="support_agent">Support Agent</option>
@@ -75,37 +53,17 @@
 
       <div>
         <label for="password" class="block mb-2 font-semibold text-gray-700">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-          placeholder="Min. 8 characters"
-          minlength="8"
-          required
-          autocomplete="new-password"
-        />
+        <input type="password" id="password" name="password" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="Min. 8 characters" minlength="8" required />
         <p class="text-red-600 text-sm mt-1 hidden" id="passwordError">Password must be at least 8 characters.</p>
       </div>
 
       <div>
         <label for="confirmPassword" class="block mb-2 font-semibold text-gray-700">Confirm Password</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          name="confirmPassword"
-          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-          placeholder="Re-enter password"
-          required
-          autocomplete="new-password"
-        />
+        <input type="password" id="confirmPassword" name="confirmPassword" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="Re-enter password" required />
         <p class="text-red-600 text-sm mt-1 hidden" id="confirmPasswordError">Passwords do not match.</p>
       </div>
 
-      <button
-        type="submit"
-        class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-3 rounded-md transition-colors duration-300"
-      >
+      <button type="submit" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-3 rounded-md transition-colors duration-300">
         Register
       </button>
     </form>
@@ -121,8 +79,6 @@
 
     registerForm.addEventListener("submit", function (e) {
       e.preventDefault();
-
-      // Clear previous errors
       hideAllErrors();
 
       const fullName = this.fullName.value.trim();
@@ -133,33 +89,36 @@
 
       let isValid = true;
 
-      if (!fullName) {
-        showError("fullNameError");
-        isValid = false;
-      }
-      if (!validateEmail(email)) {
-        showError("emailError");
-        isValid = false;
-      }
-      if (!role) {
-        showError("roleError");
-        isValid = false;
-      }
-      if (password.length < 8) {
-        showError("passwordError");
-        isValid = false;
-      }
-      if (password !== confirmPassword) {
-        showError("confirmPasswordError");
-        isValid = false;
-      }
+      if (!fullName) showError("fullNameError"), isValid = false;
+      if (!validateEmail(email)) showError("emailError"), isValid = false;
+      if (!role) showError("roleError"), isValid = false;
+      if (password.length < 8) showError("passwordError"), isValid = false;
+      if (password !== confirmPassword) showError("confirmPasswordError"), isValid = false;
 
-      if (isValid) {
-        // Here you can add your logic to submit form to server via fetch/ajax or similar
+      if (!isValid) return;
 
-        alert("Registration successful for: " + fullName + " (" + role.replace('_',' ') + ")");
-        this.reset();
-      }
+      const payload = {
+        name: fullName,
+        email: email,
+        role: role.replace('_', ' '),
+        password: password
+      };
+
+      fetch("register.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            alert(data.message);
+            registerForm.reset();
+          } else {
+            alert(data.error || "Registration failed");
+          }
+        })
+        .catch(() => alert("Something went wrong. Please try again later."));
     });
 
     function showError(id) {
@@ -167,21 +126,14 @@
     }
 
     function hideAllErrors() {
-      [
-        "fullNameError",
-        "emailError",
-        "roleError",
-        "passwordError",
-        "confirmPasswordError",
-      ].forEach((id) => document.getElementById(id).classList.add("hidden"));
+      ["fullNameError", "emailError", "roleError", "passwordError", "confirmPasswordError"]
+        .forEach(id => document.getElementById(id).classList.add("hidden"));
     }
 
     function validateEmail(email) {
-      const re =
-        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       return re.test(email.toLowerCase());
     }
   </script>
 </body>
 </html>
-

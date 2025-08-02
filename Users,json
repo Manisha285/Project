@@ -1,0 +1,8 @@
+[
+  {
+    "name": "Admin User",
+    "email": "admin@quickdesk.com",
+    "role": "admin",
+    "password": "admin123"
+  }
+]

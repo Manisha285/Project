@@ -1,20 +1,18 @@
 // admin.js
 
-// Sample data – Replace with real DB/API data
-const users = [
-  { name: "John Doe", email: "john@example.com", role: "User" },
-  { name: "Jane Smith", email: "jane@example.com", role: "Support Agent" },
-  { name: "Admin User", email: "admin@quickdesk.com", role: "Admin" }
-];
+async function loadDashboardData() {
+  const res = await fetch("dashboard-data.php");
+  const data = await res.json();
 
-const tickets = [
-  { title: "Login Issue", status: "Pending", user: "John Doe", date: "2025-07-28" },
-  { title: "Email not syncing", status: "Resolved", user: "Jane Smith", date: "2025-07-27" },
-  { title: "App crash on submit", status: "Pending", user: "John Doe", date: "2025-07-25" }
-];
+  document.getElementById("totalUsers").textContent = data.totalUsers;
+  document.getElementById("totalTickets").textContent = data.totalTickets;
+  document.getElementById("pendingTickets").textContent = data.pendingTickets;
 
-// Render user list
-function loadUsers() {
+  loadUsers(data.users);
+  loadTickets(data.tickets);
+}
+
+function loadUsers(users) {
   const container = document.getElementById("userList");
   container.innerHTML = "";
 
@@ -30,8 +28,7 @@ function loadUsers() {
   });
 }
 
-// Render ticket list
-function loadTickets() {
+function loadTickets(tickets) {
   const container = document.getElementById("ticketList");
   container.innerHTML = "";
 
@@ -48,18 +45,6 @@ function loadTickets() {
   });
 }
 
-// Dashboard stats
-function updateDashboard() {
-  document.getElementById("totalUsers").textContent = users.length;
-  document.getElementById("totalTickets").textContent = tickets.length;
-
-  const pending = tickets.filter(t => t.status.toLowerCase() === "pending").length;
-  document.getElementById("pendingTickets").textContent = pending;
-}
-
-// Initialize page
 window.addEventListener("DOMContentLoaded", () => {
-  loadUsers();
-  loadTickets();
-  updateDashboard();
+  loadDashboardData();
 });
